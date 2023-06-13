@@ -8,6 +8,7 @@ from scipy.io import wavfile
 def denoise_process():
     freq_sample, sig_audio = wavfile.read("sample2.wav")
     sig_duration_calculator = round(sig_audio.shape[0] / float(freq_sample), 2)
+    sample_rate = 44100
 
     print(f'''
         - Shape of signal: {sig_audio.shape}
@@ -37,8 +38,10 @@ def denoise_process():
     plt.xlabel("Audio signal with mixed noise")
 
     plt.subplot(2, 1, 2)
-    denoised = sgl.wiener(audio_with_noise)
-    plt.plot(time_axis, np.abs(fft.fft(denoised)))
+    audio_denoised = sgl.wiener(audio_with_noise)
+    plt.plot(time_axis, np.abs(fft.fft(audio_denoised)))
     plt.xlabel("Audio signal after mix noise removal")
     plt.show()
+    
+    wavfile.write("sample2_denoised.wav", sample_rate, audio_denoised.astype(np.int16))
     

@@ -12,6 +12,8 @@ def denoise_process():
     print(f'''
         - Shape of signal: {sig_audio.shape}
         - Duration of signal: {sig_duration_calculator} seconds
+        - Min, Max: {sig_audio.max()}, {sig_audio.min()}
+        - Datatype of signal: {sig_audio.dtype}
         '''
     )
 

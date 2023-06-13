@@ -18,8 +18,8 @@ def denoise_process():
         '''
     )
 
-    pow_audio_signal = sig_audio / np.power(2, 15)
-    pow_audio_signal = pow_audio_signal[:100]
+    pow_audio_signal = sig_audio / np.power(3, 15)
+    pow_audio_signal = pow_audio_signal[0:100]
     time_axis = 1000 * np.arange(0, len(pow_audio_signal), 1) / float(freq_sample)
 
     plt.subplot(2, 1, 1)
@@ -27,7 +27,7 @@ def denoise_process():
     plt.xlabel("Original audio signal")
 
     plt.subplot(2, 1, 2)
-    noise = np.random.normal(0, np.sqrt(1000 / 2), 100) / np.power(2, 15)
+    noise = np.random.normal(0, np.sqrt(1000 / 2), 100) / np.power(3, 15)
     audio_with_noise = pow_audio_signal + noise
     plt.plot(time_axis, np.abs(fft.fft(audio_with_noise)))
     plt.xlabel("Audio signal with mixed noise")
